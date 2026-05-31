@@ -7,6 +7,8 @@ import { Explore } from './pages/Explore';
 import { OutfitDetail } from './pages/OutfitDetail';
 import { UserProfile } from './pages/UserProfile';
 import { MyProfile } from './pages/MyProfile';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 import { useAuthStore } from './store/authStore';
 import api from './utils/api';
 
@@ -42,6 +44,8 @@ function App() {
           <Route path="/post" element={<Post />} />
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/user/:username" element={<UserProfile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
