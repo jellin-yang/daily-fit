@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Fit - 穿搭记录社区</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(to bottom, #F5F1E8, #D4C5B9);
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+        }
+
+        /* Header */
+        header {
+            background: #F5F1E8;
+            border-bottom: 2px solid #8B4513;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #8B4513;
+            font-family: 'Georgia', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a2e;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8B4513;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: #8B4513;
+            color: #F5F1E8;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #8B4513;
+            border: 2px solid #8B4513;
+        }
+
+        .btn-secondary:hover {
+            background: #8B4513;
+            color: #F5F1E8;
+        }
+
+        /* Page Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #1a1a2e;
+            max-width: 600px;
+            margin: 1.5rem auto 2.5rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 0.8rem;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-color: #8B4513;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #1a1a2e;
+            opacity: 0.7;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            margin-top: 4rem;
+        }
+
+        .gallery-section h2 {
+            font-size: 2rem;
+            color: #8B4513;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .outfit-card {
+            background: white;
+            border-radius: 0.8rem;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .outfit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            border-color: #8B4513;
+        }
+
+        .outfit-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #D4C5B9, #8B4513);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .outfit-info {
+            padding: 1rem;
+        }
+
+        .outfit-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .outfit-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #D4C5B9;
+        }
+
+        .outfit-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #8B4513;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .outfit-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .tag {
+            background: rgba(212, 197, 185, 0.5);
+            color: #1a1a2e;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+        }
+
+        .outfit-interactions {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #1a1a2e;
+            opacity: 0.7;
+            border-top: 1px solid #D4C5B9;
+            padding-top: 0.8rem;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .section-divider h2 {
+            font-size: 2rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 0.8rem;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            margin: 2rem 0;
+        }
+
+        .tech-stack h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tech-item {
+            background: #F5F1E8;
+            padding: 1rem;
+            border-radius: 0.4rem;
+            border-left: 3px solid #8B4513;
+        }
+
+        .tech-item strong {
+            color: #8B4513;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: #F5F1E8;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #D4AF37;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        /* Color swatches */
+        .color-palette {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.4rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cream {
+            background: #F5F1E8;
+            color: #1a1a2e;
+        }
+
+        .beige {
+            background: #D4C5B9;
+            color: #1a1a2e;
+        }
+
+        .rust {
+            background: #8B4513;
+        }
+
+        .navy {
+            background: #1a1a2e;
+        }
+
+        .gold {
+            background: #D4AF37;
+            color: #1a1a2e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Daily Fit ✨</div>
+        <nav class="nav-links">
+            <a href="#explore">Explore</a>
+            <a href="#calendar">Calendar</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-secondary">Login</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Daily Fit</h1>
+            <p>Your Vintage-Inspired Outfit Diary</p>
+            <div class="hero-desc">
+                Capture your daily fashion moments with a retro aesthetic. From classic to trendy,
+                document your unique style journey.
+            </div>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">+ Get Started</button>
+                <button class="btn btn-secondary">Explore Feed</button>
+            </div>
+
+            <!-- Features -->
+            <section class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Daily Posts</h3>
+                    <p>Share your outfit of the day with style</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Smart Tags</h3>
+                    <p>Organize by season, occasion, and style</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Community</h3>
+                    <p>Connect with fashion enthusiasts</p>
+                </div>
+            </section>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section class="gallery-section">
+            <h2>🎨 Gallery Preview</h2>
+            <div class="gallery-grid">
+                <div class="outfit-card">
+                    <div class="outfit-image">👖</div>
+                    <div class="outfit-info">
+                        <div class="outfit-title">Vintage Denim Day</div>
+                        <div class="outfit-user">
+                            <div class="outfit-avatar">U1</div>
+                            <span>@user1</span>
+                        </div>
+                        <div class="outfit-tags">
+                            <span class="tag">#Vintage</span>
+                            <span class="tag">#Casual</span>
+                        </div>
+                        <div class="outfit-interactions">
+                            <span>❤️ 12</span>
+                            <span>💬 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="outfit-card">
+                    <div class="outfit-image">👗</div>
+                    <div class="outfit-info">
+                        <div class="outfit-title">Summer Vibes</div>
+                        <div class="outfit-user">
+                            <div class="outfit-avatar">U2</div>
+                            <span>@user2</span>
+                        </div>
+                        <div class="outfit-tags">
+                            <span class="tag">#Summer</span>
+                            <span class="tag">#Y2K</span>
+                        </div>
+                        <div class="outfit-interactions">
+                            <span>❤️ 28</span>
+                            <span>💬 8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="outfit-card">
+                    <div class="outfit-image">🧥</div>
+                    <div class="outfit-info">
+                        <div class="outfit-title">Minimalist Look</div>
+                        <div class="outfit-user">
+                            <div class="outfit-avatar">U3</div>
+                            <span>@user3</span>
+                        </div>
+                        <div class="outfit-tags">
+                            <span class="tag">#Minimalist</span>
+                            <span class="tag">#Work</span>
+                        </div>
+                        <div class="outfit-interactions">
+                            <span>❤️ 15</span>
+                            <span>💬 5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="outfit-card">
+                    <div class="outfit-image">👠</div>
+                    <div class="outfit-info">
+                        <div class="outfit-title">Night Out</div>
+                        <div class="outfit-user">
+                            <div class="outfit-avatar">U4</div>
+                            <span>@user4</span>
+                        </div>
+                        <div class="outfit-tags">
+                            <span class="tag">#Party</span>
+                            <span class="tag">#Trendy</span>
+                        </div>
+                        <div class="outfit-interactions">
+                            <span>❤️ 42</span>
+                            <span>💬  12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="outfit-card">
+                    <div class="outfit-image">👕</div>
+                    <div class="outfit-info">
+                        <div class="outfit-title">Casual Friday</div>
+                        <div class="outfit-user">
+                            <div class="outfit-avatar">U5</div>
+                            <span>@user5</span>
+                        </div>
+                        <div class="outfit-tags">
+                            <span class="tag">#Casual</span>
+                            <span class="tag">#Relaxed</span>
+                        </div>
+                        <div class="outfit-interactions">
+                            <span>❤️ 8</span>
+                            <span>💬 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="outfit-card">
+                    <div class="outfit-image">🎒</div>
+                    <div class="outfit-info">
+                        <div class="outfit-title">Street Style</div>
+                        <div class="outfit-user">
+                            <div class="outfit-avatar">U6</div>
+                            <span>@user6</span>
+                        </div>
+                        <div class="outfit-tags">
+                            <span class="tag">#Streetwear</span>
+                            <span class="tag">#Cool</span>
+                        </div>
+                        <div class="outfit-interactions">
+                            <span>❤️ 35</span>
+                            <span>💬  10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design System -->
+        <section class="section-divider">
+            <h2>🎨 Design System</h2>
+            <p style="color: #1a1a2e; margin-bottom: 2rem;">美式复古 + 00后潮流感</p>
+            <div class="color-palette">
+                <div class="color-swatch cream">
+                    <div style="text-align: center; width: 100%;">
+                        <div>Cream</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">#F5F1E8</div>
+                    </div>
+                </div>
+                <div class="color-swatch beige">
+                    <div style="text-align: center; width: 100%;">
+                        <div>Beige</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">#D4C5B9</div>
+                    </div>
+                </div>
+                <div class="color-swatch rust">
+                    <div style="text-align: center; width: 100%;">
+                        <div>Rust</div>
+                        <div style="font-size: 0.7rem;">#8B4513</div>
+                    </div>
+                </div>
+                <div class="color-swatch navy">
+                    <div style="text-align: center; width: 100%;">
+                        <div>Navy</div>
+                        <div style="font-size: 0.7rem;">#1a1a2e</div>
+                    </div>
+                </div>
+                <div class="color-swatch gold">
+                    <div style="text-align: center; width: 100%;">
+                        <div>Gold</div>
+                        <div style="font-size: 0.7rem;">#D4AF37</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="section-divider">
+            <h2>🛠️ Tech Stack</h2>
+            <div class="tech-stack">
+                <h3>Frontend</h3>
+                <div class="tech-list">
+                    <div class="tech-item">
+                        <strong>React 18.2</strong> - UI Framework
+                    </div>
+                    <div class="tech-item">
+                        <strong>TypeScript</strong> - Type Safety
+                    </div>
+                    <div class="tech-item">
+                        <strong>Tailwind CSS</strong> - Styling
+                    </div>
+                    <div class="tech-item">
+                        <strong>Zustand</strong> - State Management
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Backend</h3>
+                <div class="tech-list">
+                    <div class="tech-item">
+                        <strong>Node.js + Express</strong> - Server
+                    </div>
+                    <div class="tech-item">
+                        <strong>MongoDB</strong> - Database
+                    </div>
+                    <div class="tech-item">
+                        <strong>JWT</strong> - Authentication
+                    </div>
+                    <div class="tech-item">
+                        <strong>Cloudinary</strong> - Image Storage
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Deployment</h3>
+                <div class="tech-list">
+                    <div class="tech-item">
+                        <strong>Vercel</strong> - Frontend Hosting
+                    </div>
+                    <div class="tech-item">
+                        <strong>Railway</strong> - Backend Hosting
+                    </div>
+                    <div class="tech-item">
+                        <strong>MongoDB Atlas</strong> - Cloud DB
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="text-align: center; margin: 4rem 0; padding: 2rem; background: rgba(139, 69, 19, 0.1); border-radius: 0.8rem; border: 2px solid rgba(139, 69, 19, 0.2);">
+            <h2 style="color: #8B4513; margin-bottom: 1rem;">Ready to Share Your Style?</h2>
+            <p style="margin-bottom: 1.5rem; color: #1a1a2e; opacity: 0.8;">Join our community of fashion enthusiasts and start your outfit diary today.</p>
+            <button class="btn btn-primary">Start Now 🚀</button>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Daily Fit. Built with ❤️ for Gen Z fashion lovers.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="#">GitHub</a> | <a href="#">Live Demo</a> | <a href="#">Portfolio</a>
+        </p>
+    </footer>
+</body>
+</html>
